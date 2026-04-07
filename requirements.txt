@@ -1,0 +1,36 @@
+# Quantum Traffic Optimization System — Requirements
+# pip install -r requirements.txt
+
+# Core
+networkx>=3.2
+numpy>=1.26
+
+# Quantum
+qiskit>=1.0
+qiskit-aer>=0.14
+qiskit-algorithms>=0.3
+qiskit-optimization>=0.6
+
+# API
+fastapi>=0.110
+uvicorn[standard]>=0.27
+pydantic>=2.0
+python-dotenv>=1.0
+requests>=2.31
+
+# Database
+sqlalchemy>=2.0
+
+# Frontend
+streamlit>=1.32
+plotly>=5.19
+folium>=0.16
+matplotlib>=3.8
+pandas>=2.2
+
+# Testing
+pytest>=8.0
+httpx>=0.26
+
+# Documentation
+fpdf2>=2.7.7
