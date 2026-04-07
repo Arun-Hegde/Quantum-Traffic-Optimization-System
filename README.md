@@ -17,7 +17,6 @@
 - 🤖 **GenAI Insights**: AI-powered route analysis and recommendations
 
 ### Professional Infrastructure
-- 🧪 **Testing**: Comprehensive pytest suite
 - 📚 **Documentation**: OpenAPI/Swagger auto-generated docs
 - 📝 **Logging**: Structured logging with rotation
 
@@ -32,11 +31,12 @@ quantum-traffic-optimization/
 ├── config/
 │   ├── settings.py                  # Global configuration
 │   └── cities.py                    # Multi-city definitions
+├── data/                            # Persistent SQLite storage
 ├── docs/
 │   ├── architecture.md              # Architecture documentation
 │   └── DEPLOYMENT.md                # Deployment documentation
 ├── frontend/
-│   └── app.py                       # Streamlit dashboard (4 tabs)
+│   └── app.py                       # Streamlit dashboard
 ├── src/
 │   ├── core/                        # Routing and optimization logic
 │   ├── database/                    # SQLAlchemy models and connection
@@ -44,9 +44,9 @@ quantum-traffic-optimization/
 │   ├── simulation/                  # Traffic graph generation
 │   ├── utils/                       # Shared utilities
 │   └── visualization/               # Core visualization components
-├── tests/                           # Comprehensive test suite
 ├── requirements.txt                 # Python dependencies
-└── run.py                           # One-click launcher
+├── run.py                           # One-click launcher
+└── streamlit_app.py                 # Streamlit Cloud entry point
 ```
 
 ---
@@ -130,20 +130,6 @@ QAOA_REPS=2
 QAOA_MAX_ITER=50
 ```
 
----
-
-## 🧪 Testing
-
-```bash
-# Run all tests
-pytest tests/ -v
-
-# With coverage
-pytest tests/ --cov=src --cov-report=html
-
-# Specific test file
-pytest tests/test_api.py -v
-```
 
 ---
 
