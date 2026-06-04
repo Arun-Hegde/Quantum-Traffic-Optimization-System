@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_beecca015f1f271978f6c90a25df83d8 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.css"/>
+</head>
+<body>
+    
+    
+    <div style="position:fixed;bottom:30px;left:30px;z-index:9999;
+                background:rgba(15,23,42,0.93);color:#f1f5f9;
+                padding:14px 18px;border-radius:12px;font-family:Arial;
+                border:1px solid #334155;font-size:13px;line-height:1.8">
+      <b style="font-size:14px">🗺️ Legend</b><br/>
+      <span style="color:#22c55e">━━</span> Free Flow 🟢<br/>
+      <span style="color:#f97316">━━</span> Moderate 🟡<br/>
+      <span style="color:#ef4444">━━</span> Congested 🔴<br/>
+      <span style="color:#3b82f6">╌╌</span> Classical (Dijkstra)<br/>
+      <span style="color:#ef4444">━━</span> Quantum (QAOA)
+    </div>
+    
+    <div style="position:fixed;top:12px;left:50%;transform:translateX(-50%);
+                z-index:9999;background:rgba(15,23,42,0.93);color:#f1f5f9;
+                padding:10px 28px;border-radius:30px;font-family:Arial;
+                border:1px solid #334155;font-size:15px;font-weight:bold;">
+      🚦 Hyderabad — Quantum Traffic Optimization
+    </div>
+    
+            <div class="folium-map" id="map_beecca015f1f271978f6c90a25df83d8" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_beecca015f1f271978f6c90a25df83d8 = L.map(
+                "map_beecca015f1f271978f6c90a25df83d8",
+                {
+                    center: [17.4065, 78.4772],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_8db66adbb488c4184b956aff41b48368 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_8db66adbb488c4184b956aff41b48368.addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topright",
+  "title": "Full Screen",
+  "titleCancel": "Exit Full Screen",
+  "forceSeparateButton": false,
+}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            var tile_layer_1c2f54326e535e23be0bbf9d11b21dea = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detect_retina": false, "max_native_zoom": 19, "max_zoom": 19, "min_zoom": 0, "no_wrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+            var mini_map_802c3d0d7c7a99c6d4fb615c324424aa = new L.Control.MiniMap(
+                tile_layer_1c2f54326e535e23be0bbf9d11b21dea,
+                {
+  "position": "bottomright",
+  "width": 150,
+  "height": 150,
+  "collapsedWidth": 25,
+  "collapsedHeight": 25,
+  "zoomLevelOffset": -5,
+  "centerFixed": false,
+  "zoomAnimation": false,
+  "toggleDisplay": true,
+  "autoToggleDisplay": false,
+  "minimized": false,
+}
+            );
+            map_beecca015f1f271978f6c90a25df83d8.addControl(mini_map_802c3d0d7c7a99c6d4fb615c324424aa);
+        
+    
+            var mouse_position_0e3753a819e626b31b98b9d3dfe21b07 = new L.Control.MousePosition(
+                {
+  "position": "bottomright",
+  "separator": " : ",
+  "emptyString": "Unavailable",
+  "lngFirst": false,
+  "numDigits": 5,
+  "prefix": "",
+}
+            );
+            mouse_position_0e3753a819e626b31b98b9d3dfe21b07.options["latFormatter"] =
+                undefined;
+            mouse_position_0e3753a819e626b31b98b9d3dfe21b07.options["lngFormatter"] =
+                undefined;
+            map_beecca015f1f271978f6c90a25df83d8.addControl(mouse_position_0e3753a819e626b31b98b9d3dfe21b07);
+        
+    
+            var poly_line_dc32f1fbc0341d53e3245b19c1b7a6d3 = L.polyline(
+                [[17.4435, 78.3772], [17.4401, 78.3489]],
+                {"bubblingMouseEvents": true, "color": "#22c55e", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#22c55e", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 6}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            poly_line_dc32f1fbc0341d53e3245b19c1b7a6d3.bindTooltip(
+                `<div>
+                     🛣️ HITEC City – Gachibowli | Traffic: 5.0 | Free Flow 🟢
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_84e0a33a02c6b52c343627a54b00f136 = L.polyline(
+                [[17.4435, 78.3772], [17.4316, 78.4119]],
+                {"bubblingMouseEvents": true, "color": "#f97316", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#f97316", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 6}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            poly_line_84e0a33a02c6b52c343627a54b00f136.bindTooltip(
+                `<div>
+                     🛣️ HITEC City – Jubilee Hills | Traffic: 16.0 | Moderate 🟡
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_23fbee8a7a49c4084192707e1c6b3e0e = L.polyline(
+                [[17.4401, 78.3489], [17.4316, 78.4119]],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#ef4444", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 6}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            poly_line_23fbee8a7a49c4084192707e1c6b3e0e.bindTooltip(
+                `<div>
+                     🛣️ Gachibowli – Jubilee Hills | Traffic: 19.0 | Congested 🔴
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_f502a059f5196f89aea9b5e7c3e05bf7 = L.polyline(
+                [[17.4401, 78.3489], [17.4156, 78.4385]],
+                {"bubblingMouseEvents": true, "color": "#f97316", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#f97316", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 6}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            poly_line_f502a059f5196f89aea9b5e7c3e05bf7.bindTooltip(
+                `<div>
+                     🛣️ Gachibowli – Banjara Hills | Traffic: 10.0 | Moderate 🟡
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_b7bfee65ae586c39faa61d0dfbcfdc8f = L.polyline(
+                [[17.4316, 78.4119], [17.4156, 78.4385]],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#ef4444", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 6}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            poly_line_b7bfee65ae586c39faa61d0dfbcfdc8f.bindTooltip(
+                `<div>
+                     🛣️ Jubilee Hills – Banjara Hills | Traffic: 18.0 | Congested 🔴
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_2069b7767271ec090f486eaf1d5d1b7f = L.polyline(
+                [[17.4316, 78.4119], [17.4374, 78.4487]],
+                {"bubblingMouseEvents": true, "color": "#f97316", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#f97316", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 6}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            poly_line_2069b7767271ec090f486eaf1d5d1b7f.bindTooltip(
+                `<div>
+                     🛣️ Jubilee Hills – Ameerpet | Traffic: 11.0 | Moderate 🟡
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_00f4c7550314babf7985ae7e6e492d30 = L.polyline(
+                [[17.4156, 78.4385], [17.4374, 78.4487]],
+                {"bubblingMouseEvents": true, "color": "#f97316", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#f97316", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 6}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            poly_line_00f4c7550314babf7985ae7e6e492d30.bindTooltip(
+                `<div>
+                     🛣️ Banjara Hills – Ameerpet | Traffic: 16.0 | Moderate 🟡
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_23b7c9b7560bc23afe4764a66ce65814 = L.polyline(
+                [[17.4156, 78.4385], [17.4399, 78.4983]],
+                {"bubblingMouseEvents": true, "color": "#f97316", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#f97316", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 6}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            poly_line_23b7c9b7560bc23afe4764a66ce65814.bindTooltip(
+                `<div>
+                     🛣️ Banjara Hills – Secunderabad | Traffic: 10.0 | Moderate 🟡
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_7f845e8faacb6e42a080ce39cdb2a343 = L.polyline(
+                [[17.4374, 78.4487], [17.4399, 78.4983]],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#ef4444", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.8, "smoothFactor": 1.0, "stroke": true, "weight": 6}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            poly_line_7f845e8faacb6e42a080ce39cdb2a343.bindTooltip(
+                `<div>
+                     🛣️ Ameerpet – Secunderabad | Traffic: 24.0 | Congested 🔴
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_63c56a985dff817bca7993bb56a87d7d = L.polyline(
+                [[17.4435, 78.3772], [17.4401, 78.3489], [17.4156, 78.4385], [17.4399, 78.4983]],
+                {"bubblingMouseEvents": true, "color": "#3b82f6", "dashArray": "12", "dashOffset": null, "fill": false, "fillColor": "#3b82f6", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 9}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            poly_line_63c56a985dff817bca7993bb56a87d7d.bindTooltip(
+                `<div>
+                     🔵 Classical (Dijkstra) Path
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_4b6825b616489d9509ccee5295b58530 = L.polyline(
+                [[17.4435, 78.3772], [17.4316, 78.4119], [17.4374, 78.4487], [17.4399, 78.4983]],
+                {"bubblingMouseEvents": true, "color": "#ef4444", "dashArray": null, "dashOffset": null, "fill": false, "fillColor": "#ef4444", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.95, "smoothFactor": 1.0, "stroke": true, "weight": 9}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            poly_line_4b6825b616489d9509ccee5295b58530.bindTooltip(
+                `<div>
+                     🔴 Quantum (QAOA) Path
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_25dbdcb4b084fdff6bba784bb032e3cc = L.marker(
+                [17.4435, 78.3772],
+                {
+}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            var icon_d3eb1a7ed339392807ea7608f71474a5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "play",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_c25c3a69596d7b16635f31794d3cc317 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_69f6f8395488fd67ce9b5bc9f1d22bbe = $(`<div id="html_69f6f8395488fd67ce9b5bc9f1d22bbe" style="width: 100.0%; height: 100.0%;">         <div style="font-family:Arial;min-width:190px;padding:4px">           <h4 style="margin:4px 0;color:#1e293b">📍 HITEC City</h4>           <hr style="margin:4px 0"/>           <b>Node ID:</b> 0<br/>           <b>GPS:</b> 17.4435, 78.3772<br/>           <b>Avg Traffic:</b> 10.5 — Moderate 🟡<br/>           <b style="color:green">🚦 SOURCE</b>                    </div></div>`)[0];
+                popup_c25c3a69596d7b16635f31794d3cc317.setContent(html_69f6f8395488fd67ce9b5bc9f1d22bbe);
+            
+        
+
+        marker_25dbdcb4b084fdff6bba784bb032e3cc.bindPopup(popup_c25c3a69596d7b16635f31794d3cc317)
+        ;
+
+        
+    
+    
+            marker_25dbdcb4b084fdff6bba784bb032e3cc.bindTooltip(
+                `<div>
+                     HITEC City
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_25dbdcb4b084fdff6bba784bb032e3cc.setIcon(icon_d3eb1a7ed339392807ea7608f71474a5);
+            
+    
+            var marker_a2b8b69b6b9440eff10372bc40645f75 = L.marker(
+                [17.4401, 78.3489],
+                {
+}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            var icon_29dd8164d94814668e92d9a1e4c35eb9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_da85f370d6e4302eab7fa060529abe68 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_d58c51a3307f0ac4e72c936e6f9bdb7a = $(`<div id="html_d58c51a3307f0ac4e72c936e6f9bdb7a" style="width: 100.0%; height: 100.0%;">         <div style="font-family:Arial;min-width:190px;padding:4px">           <h4 style="margin:4px 0;color:#1e293b">📍 Gachibowli</h4>           <hr style="margin:4px 0"/>           <b>Node ID:</b> 1<br/>           <b>GPS:</b> 17.4401, 78.3489<br/>           <b>Avg Traffic:</b> 11.3 — Moderate 🟡<br/>                               </div></div>`)[0];
+                popup_da85f370d6e4302eab7fa060529abe68.setContent(html_d58c51a3307f0ac4e72c936e6f9bdb7a);
+            
+        
+
+        marker_a2b8b69b6b9440eff10372bc40645f75.bindPopup(popup_da85f370d6e4302eab7fa060529abe68)
+        ;
+
+        
+    
+    
+            marker_a2b8b69b6b9440eff10372bc40645f75.bindTooltip(
+                `<div>
+                     Gachibowli
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a2b8b69b6b9440eff10372bc40645f75.setIcon(icon_29dd8164d94814668e92d9a1e4c35eb9);
+            
+    
+            var marker_5ed5ee6c5da8733bbd13e88a338e508c = L.marker(
+                [17.4316, 78.4119],
+                {
+}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            var icon_de8aebbff037537f26bde51e55065887 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b4867c0198db2600bb0f154fe7841c8e = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_c58a2df36506196f1fdba5fc8a021d4f = $(`<div id="html_c58a2df36506196f1fdba5fc8a021d4f" style="width: 100.0%; height: 100.0%;">         <div style="font-family:Arial;min-width:190px;padding:4px">           <h4 style="margin:4px 0;color:#1e293b">📍 Jubilee Hills</h4>           <hr style="margin:4px 0"/>           <b>Node ID:</b> 2<br/>           <b>GPS:</b> 17.4316, 78.4119<br/>           <b>Avg Traffic:</b> 16.0 — Moderate 🟡<br/>                               </div></div>`)[0];
+                popup_b4867c0198db2600bb0f154fe7841c8e.setContent(html_c58a2df36506196f1fdba5fc8a021d4f);
+            
+        
+
+        marker_5ed5ee6c5da8733bbd13e88a338e508c.bindPopup(popup_b4867c0198db2600bb0f154fe7841c8e)
+        ;
+
+        
+    
+    
+            marker_5ed5ee6c5da8733bbd13e88a338e508c.bindTooltip(
+                `<div>
+                     Jubilee Hills
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5ed5ee6c5da8733bbd13e88a338e508c.setIcon(icon_de8aebbff037537f26bde51e55065887);
+            
+    
+            var marker_dfb10c59b60946541f8818e402f93888 = L.marker(
+                [17.4156, 78.4385],
+                {
+}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            var icon_4bf0fc245c003bdfc90f039e5c5eb204 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0a0710dc8ff6c8feeb12de15b4433859 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_2c6fae55dc06850bd8a80fd17ed3bd02 = $(`<div id="html_2c6fae55dc06850bd8a80fd17ed3bd02" style="width: 100.0%; height: 100.0%;">         <div style="font-family:Arial;min-width:190px;padding:4px">           <h4 style="margin:4px 0;color:#1e293b">📍 Banjara Hills</h4>           <hr style="margin:4px 0"/>           <b>Node ID:</b> 3<br/>           <b>GPS:</b> 17.4156, 78.4385<br/>           <b>Avg Traffic:</b> 13.5 — Moderate 🟡<br/>                               </div></div>`)[0];
+                popup_0a0710dc8ff6c8feeb12de15b4433859.setContent(html_2c6fae55dc06850bd8a80fd17ed3bd02);
+            
+        
+
+        marker_dfb10c59b60946541f8818e402f93888.bindPopup(popup_0a0710dc8ff6c8feeb12de15b4433859)
+        ;
+
+        
+    
+    
+            marker_dfb10c59b60946541f8818e402f93888.bindTooltip(
+                `<div>
+                     Banjara Hills
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_dfb10c59b60946541f8818e402f93888.setIcon(icon_4bf0fc245c003bdfc90f039e5c5eb204);
+            
+    
+            var marker_d6de452810cfe104e9bb2fbfeb6ceea5 = L.marker(
+                [17.4374, 78.4487],
+                {
+}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            var icon_129c9d659e7522d38a609600d2a0854b = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_90300cb2d5e4e4b19ab02c62b06173ea = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_336e422acda942db86774d9f6ee9bd2b = $(`<div id="html_336e422acda942db86774d9f6ee9bd2b" style="width: 100.0%; height: 100.0%;">         <div style="font-family:Arial;min-width:190px;padding:4px">           <h4 style="margin:4px 0;color:#1e293b">📍 Ameerpet</h4>           <hr style="margin:4px 0"/>           <b>Node ID:</b> 4<br/>           <b>GPS:</b> 17.4374, 78.4487<br/>           <b>Avg Traffic:</b> 17.0 — Moderate 🟡<br/>                               </div></div>`)[0];
+                popup_90300cb2d5e4e4b19ab02c62b06173ea.setContent(html_336e422acda942db86774d9f6ee9bd2b);
+            
+        
+
+        marker_d6de452810cfe104e9bb2fbfeb6ceea5.bindPopup(popup_90300cb2d5e4e4b19ab02c62b06173ea)
+        ;
+
+        
+    
+    
+            marker_d6de452810cfe104e9bb2fbfeb6ceea5.bindTooltip(
+                `<div>
+                     Ameerpet
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d6de452810cfe104e9bb2fbfeb6ceea5.setIcon(icon_129c9d659e7522d38a609600d2a0854b);
+            
+    
+            var marker_296d12a8c6579171312c92f50bd3ec0d = L.marker(
+                [17.4399, 78.4983],
+                {
+}
+            ).addTo(map_beecca015f1f271978f6c90a25df83d8);
+        
+    
+            var icon_dec784c3e42c96cac7eb9933f460bf44 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "stop",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f1d64a4b8f102bc403c10852c0059cc0 = L.popup({
+  "maxWidth": 230,
+});
+
+        
+            
+                var html_36e271cb9d5c1ba3be1c703ec2115589 = $(`<div id="html_36e271cb9d5c1ba3be1c703ec2115589" style="width: 100.0%; height: 100.0%;">         <div style="font-family:Arial;min-width:190px;padding:4px">           <h4 style="margin:4px 0;color:#1e293b">📍 Secunderabad</h4>           <hr style="margin:4px 0"/>           <b>Node ID:</b> 5<br/>           <b>GPS:</b> 17.4399, 78.4983<br/>           <b>Avg Traffic:</b> 17.0 — Moderate 🟡<br/>                      <b style="color:red">🏁 DESTINATION</b>         </div></div>`)[0];
+                popup_f1d64a4b8f102bc403c10852c0059cc0.setContent(html_36e271cb9d5c1ba3be1c703ec2115589);
+            
+        
+
+        marker_296d12a8c6579171312c92f50bd3ec0d.bindPopup(popup_f1d64a4b8f102bc403c10852c0059cc0)
+        ;
+
+        
+    
+    
+            marker_296d12a8c6579171312c92f50bd3ec0d.bindTooltip(
+                `<div>
+                     Secunderabad
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_296d12a8c6579171312c92f50bd3ec0d.setIcon(icon_dec784c3e42c96cac7eb9933f460bf44);
+            
+</script>
+</html>
